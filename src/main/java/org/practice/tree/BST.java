@@ -62,7 +62,11 @@ public class BST
       insert(root, 40);
       insert(root, 45);
       insert(root, 42);
-      //inorder(root);
+      inorder(root);
+      System.out.println("");
+      preorder(root);
+      System.out.println("");
+      postorder(root);
       System.out.println("");
       /*
       20
@@ -127,13 +131,36 @@ public class BST
       return root;
    }
 
-   /*//method for inorder
+   //method for inorder traversal
    public static void inorder(Node root){
       if(root!=null){ // checking if the root is not null
          inorder(root.getLeftChild()); // visiting left child
          System.out.print(" "+root.getData()+" "); // printing data at root
          inorder(root.getRightChild()); // visiting right child
       }
-   }*/
+   }
+
+
+   //method for Depth First search preorder traversal
+   public static void preorder(Node root)
+   {
+
+      if(root!=null)
+      {
+         System.out.print(" "+ root.getData() + " ");
+         preorder(root.getLeftChild());
+         preorder(root.getRightChild());
+      }
+
+   }
+
+   //method for postorder traversal
+   public static void postorder(Node root) {
+      if(root!=null) {
+         preorder(root.getLeftChild());
+         preorder(root.getRightChild());
+         System.out.print(" "+ root.getData() + " ");
+      }
+   }
 
 }
