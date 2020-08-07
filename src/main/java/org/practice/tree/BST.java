@@ -131,7 +131,7 @@ public class BST
       return root;
    }
 
-   //method for inorder traversal
+   //method for inorder traversal <left><root><right>
    public static void inorder(Node root){
       if(root!=null){ // checking if the root is not null
          inorder(root.getLeftChild()); // visiting left child
@@ -141,7 +141,7 @@ public class BST
    }
 
 
-   //method for Depth First search preorder traversal
+   //method for Depth First search preorder traversal <root><left><right>
    public static void preorder(Node root)
    {
 
@@ -154,7 +154,7 @@ public class BST
 
    }
 
-   //method for postorder traversal
+   //method for postorder traversal <left><right><root>
    public static void postorder(Node root) {
       if(root!=null) {
          preorder(root.getLeftChild());
