@@ -87,6 +87,8 @@ public class BST
 
 
       bfs(root);
+      int h = findHeight(root);
+      System.out.println("height of binary tree:  "+h);
    }
 
 
@@ -163,4 +165,15 @@ public class BST
       }
    }
 
+   /*
+    * Height of a binary tree = number of edges in longest path from root to a leaf node
+    */
+   public static int findHeight(Node root)
+   {
+      if(root == null)
+         return -1;
+      int leftHeight = findHeight(root.getLeftChild());
+      int rightHeight = findHeight(root.getRightChild());
+      return Math.max(leftHeight, rightHeight)+1;
+   }
 }
