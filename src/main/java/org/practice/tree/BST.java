@@ -62,6 +62,7 @@ public class BST
       insert(root, 40);
       insert(root, 45);
       insert(root, 42);
+
       inorder(root);
       System.out.println("");
       preorder(root);
@@ -89,6 +90,57 @@ public class BST
       bfs(root);
       int h = findHeight(root);
       System.out.println("height of binary tree:  "+h);
+
+      deleteNode(root,42);
+      System.out.println("inorder of binary tree after deletion of node having value 42:");
+      inorder(root);
+      System.out.println("");
+   }
+
+
+
+   private static Node deleteNode(Node root, int value)
+   {
+      if(root == null) return root;
+      else if(root.getData()>value)
+         root.setLeftChild(deleteNode(root.getLeftChild(), value));
+      else if(root.getData()<value)
+         root.setRightChild(deleteNode(root.getRightChild(), value));
+      else
+      {
+         //we find the root which need to delete
+         if(root.getLeftChild()==null && root.getRightChild() == null)//if node is leaf node
+         {
+            root = null;
+         }
+         else if(root.getRightChild() == null)
+         {
+            root = root.getLeftChild();
+         }
+         else if(root.getLeftChild()==null)
+         {
+            root = root.getRightChild();
+         }
+         else
+         {
+            Node temp = findMin(root.getRightChild());
+            root.setData(temp.getData());
+            root.setRightChild(deleteNode(root.getRightChild(), temp.getData()));
+         }
+      }
+      return root;
+   }
+
+
+
+   private static Node findMin(Node root)
+   {
+      if(root==null)
+         System.out.println("root node is null");
+      else if(root.getLeftChild()!=null)
+         findMin(root.getLeftChild());
+
+      return root;
    }
 
 
