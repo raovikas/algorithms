@@ -99,6 +99,12 @@ public class BST
       System.out.println("inorder successor of node with value 5 is : "+successorNode.getData());
       Node successorNode1 = findInorderSuccessor(root, 7);//No right subtree
       System.out.println("inorder successor of node with value 7 is : "+successorNode1.getData());
+
+
+      Node preNode = findInorderPredecessors(root, 30);//Node has left subtree
+      System.out.println("inorder Predecessor of node with value 30 is : "+preNode.getData());
+      Node preNode1 = findInorderPredecessors(root, 40);//No left subtree
+      System.out.println("inorder Predecessor of node with value 40 is : "+preNode1.getData());
    }
 
 
@@ -265,6 +271,39 @@ public class BST
          return successor;
       }
 
+   }
+
+
+   public static Node findInorderPredecessors(Node root , int data){
+      if(root == null) return null;
+      Node current = find(root, data);
+      //case 1 Node has left subtree
+      if(current.getLeftChild()!=null)
+         return  findMax(current.getLeftChild());
+
+      else {
+         Node predecessor = null;
+         Node ancester = root;
+         while(ancester!=current)
+         {
+            if(current.getData()>ancester.getData())
+            {
+               predecessor = ancester;
+               ancester = ancester.getRightChild();
+            }
+            else
+               ancester = ancester.getLeftChild();
+         }
+         return predecessor;
+      }
+   }
+
+   private static Node findMax(Node root)
+   {
+      Node max = root;
+      while(root.getRightChild()!=null)
+         max = root.getRightChild();
+      return max;
    }
 
 
