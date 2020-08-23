@@ -95,6 +95,10 @@ public class BST
       System.out.println("inorder of binary tree after deletion of node having value 42:");
       inorder(root);
       System.out.println("");
+      Node successorNode = findInorderSuccessor(root, 5);//Node has right subtree
+      System.out.println("inorder successor of node with value 5 is : "+successorNode.getData());
+      Node successorNode1 = findInorderSuccessor(root, 7);//No right subtree
+      System.out.println("inorder successor of node with value 7 is : "+successorNode1.getData());
    }
 
 
@@ -227,5 +231,53 @@ public class BST
       int leftHeight = findHeight(root.getLeftChild());
       int rightHeight = findHeight(root.getRightChild());
       return Math.max(leftHeight, rightHeight)+1;
+   }
+
+   public static Node findInorderSuccessor(Node root,int data)
+   {
+      if(root == null) return null;
+      Node current = find(root,data);
+      if(current.getRightChild()!=null)//case 1 node has right subtree
+      {
+         Node temp = current.getRightChild();
+         while(temp.getLeftChild()!=null)
+         {
+            temp = temp.getLeftChild();
+         }
+         return temp;
+      }
+      //case 2 no right subtree
+      else
+      {
+         Node ancestor = root;
+         Node successor = null;
+         while(ancestor!=current) {
+            if(ancestor.getData()>current.getData())
+            {
+               successor = ancestor;
+               ancestor  = ancestor.getLeftChild();
+            }
+            else
+            {
+               ancestor = ancestor.getRightChild();
+            }
+         }
+         return successor;
+      }
+
+   }
+
+
+
+   private static Node find(Node root, int data)
+   {
+      if(root == null) return null;
+      while(root.getData()!=data) {
+         if(root.getData()> data)
+            root = root.getLeftChild();
+         else
+            root = root.getRightChild();
+      }
+      return root ;
    }
 }
