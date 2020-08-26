@@ -1,7 +1,11 @@
 package org.practice.heap;
 
 import java.util.Arrays;
-
+/*
+ * Max Heap: In this type of heap, the value of parent node will always be greater
+ * than or equal to the value of child node across the tree
+ *  and the node with highest value will be the root node of the tree.
+ */
 public class MaxHeap
 {
 
